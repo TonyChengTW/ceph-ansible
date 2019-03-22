@@ -8,6 +8,6 @@
 
 - name: configure debian ceph stable community repository
   apt_repository:
-    repo: "deb {{ ceph_stable_repo }} {{ ceph_stable_distro_source | default(ansible_lsb.codename) }} main"
+    repo: "deb [arch=amd64] {{ ceph_stable_repo }} {{ ceph_stable_distro_source | default(ansible_lsb.codename) }} main"
     state: present
     update_cache: yes
