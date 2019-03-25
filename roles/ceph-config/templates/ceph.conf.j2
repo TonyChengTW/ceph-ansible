@@ -41,13 +41,13 @@ fsid = {{ fsid }}
 log file = /dev/null
 mon cluster log file = /dev/null
 {% endif %}
-{% if ceph_release not in ['jewel', 'kraken', 'luminous', 'mimic'] %}
+{% if ceph_release in ['jewel', 'kraken', 'luminous', 'mimic'] %}
 {% set mon_host_v1_suffix = ":6789" %}
 {% set mon_host_v2_suffix = ":3300" %}
 {% endif %}
 mon host = {% if nb_mon > 0 %}
 {% for host in _monitor_addresses -%}
-[{{ "v2:" + host.addr + mon_host_v2_suffix }},{{ "v1:" + host.addr + mon_host_v1_suffix }}]
+{{ host.addr }}
 {%- if not loop.last -%},{%- endif %}
 {%- endfor %}
 {% elif nb_mon == 0 and inventory_hostname in groups.get(client_group_name, []) %}
@@ -75,6 +75,7 @@ log file = {{ rbd_client_log_file }} # must be writable by QEMU and allowed by S
 
 {% if inventory_hostname in groups.get(osd_group_name, []) %}
 {% if osd_objectstore == 'filestore' %}
+
 [osd]
 osd mkfs type = {{ osd_mkfs_type }}
 osd mkfs options xfs = {{ osd_mkfs_options_xfs }}
@@ -132,3 +133,5 @@ log file = /var/log/ceph/{{ cluster }}-rgw-{{ hostvars[host]['ansible_hostname']
 {% endif %}
 {% endfor %}
 {% endif %}
+[mon]
+mgr initial modules = dashboard

@@ -1,0 +1,35 @@
+---
+
+#- name: Debuging
+#  vars:
+#     contents: "{{ lookup('file', '/etc/foo.txt') }}"
+#  debug: msg="testing: {{ contents }}"
+
+#- name: Debuging2
+#  debug: msg="eth0 "{{ eth0_ip }}" eth1 "{{ eth1_ip }}" eth2 "{{ eth2_ip }}" eth3 "{{ eth3_ip }}""
+
+#- name: Debuging3
+#  debug: msg="{{ hostvars[inventory_hostname] }}"
+#  debug: msg="{{ hostvars[inventory_hostname].ansible_eth1.macaddress }}"
+#  debug: msg="{{ hostvars[inventory_hostname].ansible_eth0.ipv4.address }}"
+
+#- name: Debuging4
+#  debug: msg="{{ item }}"
+#  with_inventory_hostnames:
+#    - all
+  
+#- name: Debuging5
+#  debug: msg="{{ group_names }}"
+
+#- name: Debuging6
+#  shell: /bin/hostname | grep ceph
+#  register: hostname_with_ceph
+#  ignore_errors: true
+
+#- debug: msg="{{ hostname_with_ceph.rc }}"
+
+#- debug: msg="skip"
+#  when: hostname_with_ceph.rc != 0
+
+- name: Debug7
+  debug: msg="{{ groups['mons'] }}"

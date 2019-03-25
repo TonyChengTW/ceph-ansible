@@ -28,6 +28,13 @@
     CEPH_CONTAINER_BINARY: "{{ container_binary }}"
   when:
     - cephx
+  ignore_errors: true
+
+- name: create ceph admin keys (fixed by Tony)
+  shell: "/usr/sbin/ceph-create-keys --cluster {{ cluster }} --id {{ hostvars[inventory_hostname].inventory_hostname }}"
+  register: ceph-create-keys
+  when:
+    - cephx
 
 - block:
   - name: create ceph mgr keyring(s)
@@ -70,10 +77,10 @@
     flat: yes
   with_items:
     - /var/lib/ceph/bootstrap-osd/{{ cluster }}.keyring
-    - /var/lib/ceph/bootstrap-rgw/{{ cluster }}.keyring
-    - /var/lib/ceph/bootstrap-mds/{{ cluster }}.keyring
+    #- /var/lib/ceph/bootstrap-rgw/{{ cluster }}.keyring
+    #- /var/lib/ceph/bootstrap-mds/{{ cluster }}.keyring
     - /var/lib/ceph/bootstrap-rbd/{{ cluster }}.keyring
-    - /var/lib/ceph/bootstrap-rbd-mirror/{{ cluster }}.keyring
+    #- /var/lib/ceph/bootstrap-rbd-mirror/{{ cluster }}.keyring
     - /etc/ceph/{{ cluster }}.client.admin.keyring
   when:
     - cephx

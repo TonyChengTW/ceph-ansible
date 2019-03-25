@@ -1,0 +1,15 @@
+---
+# Copyright 2019 - 104 Job Bank Inc. All rights reserved
+# Version: 0.1
+# tony.cheng@104.com.tw
+
+#- name: check hostname if is included with 'ceph'
+#  shell: /bin/hostname | grep ceph
+#  register: hostname_with_ceph
+#  failed_when: hostname_with_ceph.rc != 1 and hostname_with_ceph.rc != 0
+#  #ignore_errors: True
+
+- name: Change Ceph hostname - set hostname with prefix "ceph-"
+  command: hostnamectl set-hostname {{ hostvars[inventory_hostname].inventory_hostname }}
+  #when: not hostvars[inventory_hostname].inventory_hostname is search("ceph")
+  #when: not ansible_hostname is search("ceph")

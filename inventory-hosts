@@ -1,18 +1,23 @@
-ctrl1-ceph ansible_ssh_host=10.0.0.111 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-comp1-ceph ansible_ssh_host=10.0.0.121 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-comp2-ceph ansible_ssh_host=10.0.0.122 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+ceph-ctrl1 ansible_ssh_host=10.0.0.111 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+ceph-comp1 ansible_ssh_host=10.0.0.121 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+ceph-comp2 ansible_ssh_host=10.0.0.122 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 
 [mons]
-ctrl1-ceph
-comp1-ceph
-comp2-ceph
+ceph-ctrl1
+ceph-comp1
+ceph-comp2
 
 [osds]
-ctrl1-ceph
-comp1-ceph
-comp2-ceph
+ceph-ctrl1 devices="['/dev/sdb']"
+ceph-comp1 devices="['/dev/sdb', '/dev/sdc']"
+ceph-comp2 devices="['/dev/sdb', '/dev/sdc']"
 
 [mgrs]
-ctrl1-ceph
-comp1-ceph
-comp2-ceph
+ceph-ctrl1
+ceph-comp1
+ceph-comp2
+
+[clients]
+ceph-ctrl1
+ceph-comp1
+ceph-comp2

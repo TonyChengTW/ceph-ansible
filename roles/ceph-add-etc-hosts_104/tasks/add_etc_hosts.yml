@@ -1,0 +1,14 @@
+---
+# Copyright 2019 - 104 Job Bank Inc. All rights reserved
+# Version: 0.1
+# tony.cheng@104.com.tw
+
+- name: Add IP address of all hosts to all hosts (/etc/hosts)
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item }}$'
+    #insertafter: EOF
+    #backrefs: no
+    line: "{{ hostvars[item].ansible_eth2.ipv4.address }}       {{item}}"
+    state: present
+  with_items: "{{ groups['mons'] }}"

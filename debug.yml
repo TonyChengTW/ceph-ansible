@@ -1,0 +1,7 @@
+---
+
+- name: Debug task
+  hosts: all
+  gather_facts: yes
+  roles:
+    - debug
