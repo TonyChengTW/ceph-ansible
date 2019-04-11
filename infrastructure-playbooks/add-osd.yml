@@ -26,6 +26,12 @@
     delegate_facts_host: True
 
   pre_tasks:
+    - name: apt update
+      raw: test -e /usr/bin/python || sudo apt update -y
+
+    - name: install python
+      raw: test -e /usr/bin/python || sudo apt install -y python
+
     - name: gather facts
       setup:
       when:

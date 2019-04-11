@@ -1,24 +1,31 @@
 # ceph-ansible
 ============
 ## Installation Ceph Cluster:
+
 The Ceph playbook is independence from the openstack playbook, you can download it from:
 https://github.com/TonyChengTW/ceph-ansible
 
 I've fixed some of the original Ceph playbook bugs , you can refer it from:
+
 - https://github.com/TonyChengTW/ceph-ansible/commit/e3aa3abdee8131ac825416796441a696b3f45bdd
+
 - https://github.com/TonyChengTW/ceph-ansible/commit/9b1ec8754544bc86db00f0d8cda612c56d9d6d7c
 
 You can refer Ceph ansible readme installation guide:
+
 https://github.com/TonyChengTW/ceph-ansible/blob/master/README.rst
 
 Or just a quick start:
+
 Using the same virtualenv to run Ceph ansible-playbook
+
 ```
 # cd /deploy_u18
 # git clone https://github.com/TonyChengTW/ceph-ansible.git
 # cd ceph-ansible
 # ansible-playbook -i inventory-hosts site.yml
 ```
+
 The main Ceph configuration files are located in:
 - ceph-ansible/group_vars/all.yml
 - ceph-ansible/group_vars/osds.yml
