@@ -1,0 +1,7 @@
+- hosts: comp3-localdisk
+  gather_facts: yes
+  become: True
+  tasks:
+    # Edit by Tony
+    - import_role:
+        name: ceph-fetch-keys_104

@@ -295,7 +295,9 @@ rbd_cache: "true"
 rbd_cache_writethrough_until_flush: "true"
 rbd_concurrent_management_ops: 20
 
-rbd_client_directories: true # this will create rbd_client_log_path and rbd_client_admin_socket_path directories with proper permissions
+#rbd_client_directories: true 
+
+# this will create rbd_client_log_path and rbd_client_admin_socket_path directories with proper permissions
 
 # Permissions for the rbd_client_log_path and
 # rbd_client_admin_socket_path. Depending on your use case for Ceph
@@ -319,6 +321,7 @@ rbd_client_directories: true # this will create rbd_client_log_path and rbd_clie
 #    rbd_client_directory_group: "kvm"
 #    rbd_client_directory_mode: "0755"
 #
+
 # If you set rbd_client_directory_mode, you must use a string (e.g.,
 # 'rbd_client_directory_mode: "0755"', *not*
 # 'rbd_client_directory_mode: 0755', or Ansible will complain: mode
@@ -595,17 +598,17 @@ openstack_cinder_pool:
   application: "rbd"
   size: "{{ osd_pool_default_size }}"
   min_size: "{{ osd_pool_default_min_size }}"
-openstack_nova_pool:
-  name: "vms"
-  pg_num: "{{ osd_pool_default_pg_num }}"
-  pgp_num: "{{ osd_pool_default_pg_num }}"
-  rule_name: "replicated_rule"
-  type: 1
-  erasure_profile: ""
-  expected_num_objects: ""
-  application: "rbd"
-  size: "{{ osd_pool_default_size }}"
-  min_size: "{{ osd_pool_default_min_size }}"
+#openstack_nova_pool:
+#  name: "vms"
+#  pg_num: "{{ osd_pool_default_pg_num }}"
+#  pgp_num: "{{ osd_pool_default_pg_num }}"
+#  rule_name: "replicated_rule"
+#  type: 1
+#  erasure_profile: ""
+#  expected_num_objects: ""
+#  application: "rbd"
+#  size: "{{ osd_pool_default_size }}"
+#  min_size: "{{ osd_pool_default_min_size }}"
 openstack_emphemeral_pool:
   name: "emphemeral"
   pg_num: "{{ osd_pool_default_pg_num }}"
@@ -654,7 +657,7 @@ openstack_emphemeral_pool:
 openstack_pools:
   - "{{ openstack_glance_pool }}"
   - "{{ openstack_cinder_pool }}"
-  - "{{ openstack_nova_pool }}"
+#  - "{{ openstack_nova_pool }}"
   - "{{ openstack_emphemeral_pool }}"
 #  - "{{ openstack_gnocchi_pool }}"
 #  - "{{ openstack_cephfs_data_pool }}"
@@ -666,11 +669,13 @@ openstack_pools:
 # By default, keys will be auto-generated.
 #
 openstack_keys:
-  - { name: client.glance, caps: { mon: "profile rbd", osd: "profile rbd pool=volumes, profile rbd pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
-  - { name: client.cinder, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_cinder_pool.name }}, profile rbd pool={{ openstack_nova_pool.name }}, profile rbd pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
-  - { name: client.emphemeral, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_emphemeral_pool.name }}"}, mode: "0600" }
+#  - { name: client.glance, caps: { mon: "profile rbd", osd: "profile rbd pool=volumes, profile rbd pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
+  - { name: client.glance, caps: { mon: "allow r", osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
+#  - { name: client.cinder, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_cinder_pool.name }}, profile rbd pool={{ openstack_nova_pool.name }}, profile rbd pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
+  - { name: client.cinder, caps: { mon: "allow r", osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_cinder_pool.name }}, allow rwx pool={{ openstack_emphemeral_pool.name }}, allow rwx pool={{ openstack_glance_pool.name }}"}, mode: "0600" }
+#  - { name: client.emphemeral, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_emphemeral_pool.name }}"}, mode: "0600" }
 #  - { name: client.gnocchi, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_gnocchi_pool.name }}"}, mode: "0600", }
-  - { name: client.openstack, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_glance_pool.name }}, profile rbd pool={{ openstack_nova_pool.name }}, profile rbd pool={{ openstack_cinder_pool.name }}, profile rbd pool={{ openstack_emphemeral_pool.name }}"}, mode: "0600" }
+#  - { name: client.openstack, caps: { mon: "profile rbd", osd: "profile rbd pool={{ openstack_glance_pool.name }}, profile rbd pool={{ openstack_nova_pool.name }}, profile rbd pool={{ openstack_cinder_pool.name }}, profile rbd pool={{ openstack_emphemeral_pool.name }}"}, mode: "0600" }
 
 
 ###############

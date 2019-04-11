@@ -1,0 +1,24 @@
+---
+# Copyright 2019 - 104 Job Bank Inc. All rights reserved
+# Version: 0.1
+# tony.cheng@104.com.tw
+
+- name: 104 | add a rsa key
+  copy:
+    src: id_rsa
+    dest: /tmp/id_rsa
+    owner: root
+    group: root
+    mode: 0600
+
+- name: 104 | copy /etc/ceph/*.keyring from osd node
+  command: scp -i /tmp/id_rsa root@"{{ hostvars[groups['keyring_copy'][0]].ansible_eth0.ipv4.address }}":/etc/ceph/*.keyring /etc/ceph
+
+- name: 104 | copy /var/lib/ceph/bootstrap-osd/ceph.keyring from osd node
+  command: scp -i /tmp/id_rsa root@"{{ hostvars[groups['keyring_copy'][0]].ansible_eth0.ipv4.address }}":/var/lib/ceph/bootstrap-osd/ceph.keyring /var/lib/ceph/bootstrap-osd/
+
+- name: 104 | remove rsa key
+  file:
+    path: /tmp/id_rsa
+    state: absent
+    force: yes

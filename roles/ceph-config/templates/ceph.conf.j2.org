@@ -26,6 +26,7 @@ osd crush chooseleaf type = 0
 {% set nb_client = groups.get(client_group_name, []) | length | int %}
 {% set nb_osd = groups.get(osd_group_name, []) | length | int %}
 {% if inventory_hostname in groups.get(client_group_name, []) and not inventory_hostname == groups.get(client_group_name, []) | first %}
+{% set ceph_release = hostvars[groups[client_group_name][0]]['ceph_release'] %}
 {% endif %}
 {% if nb_mon > 0 and inventory_hostname in groups.get(mon_group_name, []) %}
 mon initial members = {% for host in groups[mon_group_name] %}
@@ -44,6 +45,10 @@ fsid = {{ fsid }}
 {% if containerized_deployment %}
 log file = /dev/null
 mon cluster log file = /dev/null
+{% endif %}
+{% if ceph_release in ['jewel', 'kraken', 'luminous', 'mimic'] %}
+{% set mon_host_v1_suffix = ":6789" %}
+{% set mon_host_v2_suffix = ":3300" %}
 {% endif %}
 mon host = {% if nb_mon > 0 %}
 {% for host in _monitor_addresses -%}
