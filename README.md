@@ -11,6 +11,10 @@ I've fixed some of the original Ceph playbook bugs , you can refer it from:
 
 - https://github.com/TonyChengTW/ceph-ansible/commit/9b1ec8754544bc86db00f0d8cda612c56d9d6d7c
 
+- https://github.com/TonyChengTW/ceph-ansible/commit/36b5ee741606c912e4da3085e16aad1d13114a16
+
+- https://github.com/TonyChengTW/ceph-ansible/commit/f739e1043d149f895239caca3820dc30417dc045
+
 You can refer Ceph ansible readme installation guide:
 
 https://github.com/TonyChengTW/ceph-ansible/blob/master/README.rst
@@ -51,13 +55,20 @@ Then continue to run :
 ## Add OSDs
 
 1. Modify 'inventory-hosts' file:
+
 add inventory hosts info at the top of line (for [all]) and add each of the inventory host name and devices in [osds]
 
 2. Also modify 'inventory-hosts' file:
+
 edit a osd node which is not in [mons] at [keyring_copy]
 
-3. execute ansible-playbook:
-```#ansible-playbook -i inventory-hosts --limit comp3-localdisk infrastructure-playbooks/add-osd.yml``` 
+3. execute ansible-playbook via:
+
+```# ./add_new_osd_node.sh comp3-localdisk```
+
+or
+
+```# ansible-playbook -i inventory-hosts --limit comp3-localdisk infrastructure-playbooks/add-osd.yml``` 
 
 ## License
 

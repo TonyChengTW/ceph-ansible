@@ -112,8 +112,8 @@
       when: containerized_deployment | bool
 
     # Edit by Tony
-    - import_role:
-        name: ceph-fetch-keys_104
+#    - import_role:
+#        name: ceph-fetch-keys_104
 
     - import_role:
         name: ceph-common

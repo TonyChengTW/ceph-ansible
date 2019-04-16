@@ -1,7 +1,8 @@
 ceph-ctrl1 ansible_ssh_host=10.0.0.111 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 ceph-comp1 ansible_ssh_host=10.0.0.121 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 ceph-comp2 ansible_ssh_host=10.0.0.122 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-comp3-localdisk ansible_ssh_host=10.0.0.123 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#comp3-localdisk ansible_ssh_host=10.0.0.123 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#comp4-localdisk ansible_ssh_host=10.0.0.124 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 
 [mons]
 ceph-ctrl1
@@ -12,20 +13,11 @@ ceph-comp2
 ceph-ctrl1 devices="['/dev/sdb']"
 ceph-comp1 devices="['/dev/sdb', '/dev/sdc']"
 ceph-comp2 devices="['/dev/sdb', '/dev/sdc']"
-comp3-localdisk devices="['/dev/sdb']"
+#comp3-localdisk devices="['/dev/sdb']"
+#comp4-localdisk devices="['/dev/sdb', '/dev/sdc']"
 
-[mgrs]
-ceph-ctrl1
-ceph-comp1
-ceph-comp2
+[mgrs:children]
+mons
 
-[clients]
-ceph-ctrl1
-ceph-comp1
-ceph-comp2
-comp3-localdisk
-
-# Edit by Tony , which is used by role : ceph-fetch-keys_104
-# the task: copy_osd_node_ceph_key.yml will lookup for a osd node to copy keyring
-[keyring_copy]
-ceph-comp1
+[clients:children]
+osds

@@ -13,12 +13,3 @@
 
 - name: 104 | copy /etc/ceph/*.keyring from osd node
   command: scp -r -i /tmp/id_rsa -o StrictHostKeyChecking=no root@"{{ hostvars[groups['keyring_copy'][0]].ansible_eth0.ipv4.address }}":/etc/ceph/ /etc
-
-- name: 104 | copy /var/lib/ceph/bootstrap-osd/ceph.keyring from osd node
-  command: scp -r -i /tmp/id_rsa -o StrictHostKeyChecking=no root@"{{ hostvars[groups['keyring_copy'][0]].ansible_eth0.ipv4.address }}":/var/lib/ceph/bootstrap-osd/ /var/lib
-
-- name: 104 | remove rsa key
-  file:
-    path: /tmp/id_rsa
-    state: absent
-    force: yes
