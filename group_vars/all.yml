@@ -99,11 +99,11 @@ debian_package_dependencies:
 
 # Enable the ntp service by default to avoid clock skew on ceph nodes
 # Disable if an appropriate NTP client is already installed and configured
-#ntp_service_enabled: true
+ntp_service_enabled: true
 
 # Set type of NTP client daemon to use, valid entries are chronyd, ntpd or timesyncd
 # Note that this selection is currently ignored on containerized deployments
-#ntp_daemon_type: timesyncd
+ntp_daemon_type: chronyd
 
 
 # Set uid/gid to default '64045' for bootstrap directories.
@@ -153,8 +153,8 @@ ceph_repository: community
 #
 # Enabled when ceph_repository == 'community'
 #
-ceph_mirror: http://10.0.0.72
-ceph_stable_key: http://10.0.0.72/debian-luminous/dists/bionic/Release.gpg
+ceph_mirror: http://10.0.0.71
+ceph_stable_key: http://10.0.0.71/debian-luminous/dists/bionic/Release.gpg
 ceph_stable_release: luminous
 ceph_stable_repo: "{{ ceph_mirror }}/debian-{{ ceph_stable_release }}"
 
@@ -340,7 +340,7 @@ rbd_client_admin_socket_path: /var/run/ceph # must be writable by QEMU and allow
 # These variables must be defined at least in all.yml and overrided if needed (inventory host file or group_vars/*.yml).
 # Eg. If you want to specify for each monitor which address the monitor will bind to you can set it in your **inventory host file** by using 'monitor_address' variable.
 # Preference will go to monitor_address if both monitor_address and monitor_interface are defined.
-monitor_interface: eth2
+monitor_interface: eth3
 monitor_address: 0.0.0.0
 monitor_address_block: subnet
 # set to either ipv4 or ipv6, whichever your network is using

@@ -3,12 +3,31 @@
 # Version: 0.1
 # tony.cheng@104.com.tw
 
+- name: print inventory hostname in mons
+  debug: msg="{{ item }}"
+  with_items: "{{ groups['mons'] }}"
+
+- name: print ansible_eth2.ipv4.address
+  debug: msg="{{ hostvars[item].ansible_eth2.ipv4.address }}"
+  with_items: "{{ groups['mons'] }}"
+  ignore_errors: yes
+
+- name: print ansible_eth3.ipv4.address
+  debug: msg="{{ hostvars[item].ansible_eth3.ipv4.address }}"
+  with_items: "{{ groups['mons'] }}"
+  ignore_errors: yes
+
+- name: print ansible_eth4.ipv4.address
+  debug: msg="{{ hostvars[item].ansible_eth4.ipv4.address }}"
+  with_items: "{{ groups['mons'] }}"
+  ignore_errors: yes
+
 - name: Add IP address of all hosts to all hosts (/etc/hosts)
   lineinfile:
     dest: /etc/hosts
     regexp: '.*{{ item }}$'
     #insertafter: EOF
     #backrefs: no
-    line: "{{ hostvars[item].ansible_eth2.ipv4.address }}       {{item}}"
+    line: "{{ hostvars[item].ansible_eth3.ipv4.address }}       {{item}}"
     state: present
   with_items: "{{ groups['mons'] }}"
