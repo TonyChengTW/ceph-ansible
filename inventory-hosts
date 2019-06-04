@@ -9,7 +9,7 @@ ceph-pre-dscp1
 ceph-pre-dscp2
 
 [osds]
-ceph-pre-dsctl1 devices="['/dev/sdb']"
+ceph-pre-dsctl1 devices="['/dev/sdb', '/dev/sdc']"
 ceph-pre-dscp1 devices="['/dev/sdb', '/dev/sdc']"
 ceph-pre-dscp2 devices="['/dev/sdb', '/dev/sdc']"
 #pre-dscp3 devices="['/dev/sdb', '/dev/sdc']"
