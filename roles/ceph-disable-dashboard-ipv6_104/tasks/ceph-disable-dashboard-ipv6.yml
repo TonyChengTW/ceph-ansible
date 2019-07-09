@@ -1,0 +1,13 @@
+---
+# Copyright 2019 - 104 Job Bank Inc. All rights reserved
+# Version: 0.1
+# tony.cheng@104.com.tw
+
+- name: 104 | modify ceph-mgr dashboard listen IPv4 without binding IPv6
+  command: ceph config-key set mgr/dashboard/server_addr 0.0.0.0
+
+- name: 104 | disable dashboard
+  command: ceph mgr module disable dashboard
+
+- name: 104 | enable dashboard
+  command: ceph mgr module enable dashboard

@@ -2,6 +2,9 @@
 # {{ ansible_managed }}
 
 [global]
+max open files = 1024000
+mon_max_pg_per_osd = 768
+
 {% if not cephx %}
 auth cluster required = none
 auth service required = none
@@ -105,6 +108,18 @@ osd memory target = {{ _osd_memory_target | default(osd_memory_target) }}
 {% endif %}
 {% endif %}
 
+osd max write size = 512 
+osd client message size cap = 2147483648 
+osd deep scrub stride = 131072 
+osd op threads = 8 
+osd disk threads = 4 
+osd map cache size = 1024 
+osd map cache bl size = 128 
+osd mount options xfs = "rw,noexec,nodev,noatime,nodiratime,nobarrier" 
+osd recovery op priority = 50
+osd recovery max active = 10
+osd max backfills = 4 
+
 {% if inventory_hostname in groups.get(rgw_group_name, []) %}
 {% for host in groups[rgw_group_name] %}
 {% set _rgw_hostname = hostvars[host]['rgw_hostname'] | default(hostvars[host]['ansible_hostname']) %}
@@ -132,7 +147,10 @@ log file = /var/log/ceph/{{ cluster }}-rgw-{{ hostvars[host]['ansible_hostname']
 {% endfor %}
 {% endif %}
 [client]
-rbd_cache = true
+rbd cache = true
+rbd cache size = 268435456
+rbd cache max dirty = 134217728
+rbd cache max dirty age = 5
 rbd_cache_writethrough_until_flush = true
 #admin_socket = /var/run/ceph/guests/$cluster-$type.$id.$pid.$cctid.asok
 log_file = /var/log/qemu/qemu-guest-$pid.log
