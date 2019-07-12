@@ -19,8 +19,8 @@
   become: true
   pre_tasks:
     - import_tasks: raw_install_python.yml
-    - import_role:
-        name: ceph-add-etc-hosts_104
+#    - import_role:
+#        name: ceph-add-etc-hosts_104
 
 # Defines deployment design and assigns role to server groups
 - hosts:
