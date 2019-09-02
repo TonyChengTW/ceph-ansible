@@ -14,8 +14,8 @@ dscp2
 #dscp1 devices="['/dev/sdb', '/dev/sdc']"
 #dscp2 devices="['/dev/sdb', '/dev/sdc']"
 #dscp3 devices="['/dev/sdb', '/dev/sdc']"
+#dscp3 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde']"
 #dscp4 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde', '/dev/sdf', '/dev/sdg']"
-dscp4 devices="['/dev/sdb', '/dev/sdc']"
 
 [mgrs:children]
 mons

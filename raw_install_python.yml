@@ -1,4 +1,7 @@
 ---
+- name: Preceding - netplan apply
+  command: netplan apply
+
 - name: check for python
   stat:
     path: /usr/bin/python
