@@ -1,8 +1,8 @@
 dsctl1 ansible_ssh_host=172.23.0.11 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 dscp1 ansible_ssh_host=172.23.0.21 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 dscp2 ansible_ssh_host=172.23.0.22 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-#dscp3 ansible_ssh_host=172.23.0.23 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-#dscp4 ansible_ssh_host=172.23.0.24 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+dscp3 ansible_ssh_host=172.23.0.23 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+dscp4 ansible_ssh_host=172.23.0.24 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 
 [mons]
 dsctl1
@@ -10,11 +10,12 @@ dscp1
 dscp2
 
 [osds]
-dsctl1 devices="['/dev/sdb', '/dev/sdc']"
-dscp1 devices="['/dev/sdb', '/dev/sdc']"
-dscp2 devices="['/dev/sdb', '/dev/sdc']"
-#dscp3 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde']"
+#dsctl1 devices="['/dev/sdb', '/dev/sdc']"
+#dscp1 devices="['/dev/sdb', '/dev/sdc']"
+#dscp2 devices="['/dev/sdb', '/dev/sdc']"
+#dscp3 devices="['/dev/sdb', '/dev/sdc']"
 #dscp4 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde', '/dev/sdf', '/dev/sdg']"
+dscp4 devices="['/dev/sdb', '/dev/sdc']"
 
 [mgrs:children]
 mons

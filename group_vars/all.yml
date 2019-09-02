@@ -153,8 +153,8 @@ ceph_repository: community
 #
 # Enabled when ceph_repository == 'community'
 #
-ceph_mirror: http://172.23.0.71
-ceph_stable_key: http://172.23.0.71/debian-luminous/dists/bionic/Release.gpg
+ceph_mirror: http://172.23.0.10
+ceph_stable_key: http://172.23.0.10/debian-luminous/dists/bionic/Release.gpg
 ceph_stable_release: luminous
 ceph_stable_repo: "{{ ceph_mirror }}/debian-{{ ceph_stable_release }}"
 
