@@ -13,6 +13,7 @@ dscp2
 dsctl1 devices="['/dev/sdb', '/dev/sdc']"
 dscp1 devices="['/dev/sdb', '/dev/sdc']"
 dscp2 devices="['/dev/sdb', '/dev/sdc']"
+#dscp3 devices="['/dev/sdb', '/dev/sdc']"
 #dscp3 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde']"
 #dscp4 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde', '/dev/sdf', '/dev/sdg']"
 
