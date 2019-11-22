@@ -1,8 +1,12 @@
 dsctl1 ansible_ssh_host=172.23.0.11 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 dscp1 ansible_ssh_host=172.23.0.21 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 dscp2 ansible_ssh_host=172.23.0.22 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-dscp3 ansible_ssh_host=172.23.0.23 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
-dscp4 ansible_ssh_host=172.23.0.24 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#dscp3 ansible_ssh_host=172.23.0.23 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#dscp4 ansible_ssh_host=172.23.0.24 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#dscp5 ansible_ssh_host=172.23.0.25 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#dscp6 ansible_ssh_host=172.23.0.26 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+#dscp7 ansible_ssh_host=172.23.0.27 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
+dscp8 ansible_ssh_host=172.23.0.28 ansible_ssh_user='root' ansible_ssh_private_key_file='./id_rsa' ansible_ssh_port=22
 
 [mons]
 dsctl1
@@ -16,6 +20,10 @@ dscp2
 #dscp3 devices="['/dev/sdb', '/dev/sdc']"
 #dscp3 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde']"
 #dscp4 devices="['/dev/sdb', '/dev/sdc', '/dev/sdd', '/dev/sde', '/dev/sdf', '/dev/sdg']"
+#dscp5 devices="['/dev/sdb', '/dev/sdc']"
+#dscp6 devices="['/dev/sdb', '/dev/sdc']"
+#dscp7 devices="['/dev/sdb', '/dev/sdc']"
+dscp8 devices="['/dev/sdb']"
 
 [mgrs:children]
 mons
