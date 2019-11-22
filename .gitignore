@@ -18,3 +18,4 @@ ceph-ansible.spec
 !raw_install_python.yml
 id_rsa
 roles/ceph-fetch-keys_104/files/id_rsa
+inventory-hosts
