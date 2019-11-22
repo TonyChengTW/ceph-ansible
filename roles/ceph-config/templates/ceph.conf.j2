@@ -16,8 +16,9 @@ auth cluster required = cephx
 auth service required = cephx
 auth client required = cephx
 {% endif %}
-#mon_osd_full_ratio = .80
-#mon_osd_nearfull_ratio = .70
+mon_osd_full_ratio = .95
+mon_osd_nearfull_ratio = .70
+rbd default features = 125
 {% if ip_version == 'ipv6'  %}
 ms bind ipv6 = true
 {% endif %}
@@ -115,8 +116,8 @@ osd op threads = 8
 osd disk threads = 4 
 osd map cache size = 1024 
 osd map cache bl size = 128 
-osd mount options xfs = "rw,noexec,nodev,noatime,nodiratime,nobarrier" 
-osd recovery op priority = 50
+osd mount options xfs = "rw,noexec,nodev,noatime,nodiratime,inode64" 
+osd recovery op priority = 4
 osd recovery max active = 10
 osd max backfills = 4 
 
