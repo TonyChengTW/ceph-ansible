@@ -18,7 +18,7 @@ auth client required = cephx
 {% endif %}
 mon_osd_full_ratio = .95
 mon_osd_nearfull_ratio = .70
-rbd default features = 125
+# rbd default features = 125    # This is for journaling feature (rbd-mirror)
 {% if ip_version == 'ipv6'  %}
 ms bind ipv6 = true
 {% endif %}
